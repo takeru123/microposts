@@ -6,6 +6,12 @@
         <%= @user.name %>
       </h1>
     </section>
+    <ul>
+      <li>Location：<%= @user.location %></li>
+      <li>Email：<%= @user.email %></li>
+      <li>Age：<%= @user.age %></li>
+    </ul>
+
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
@@ -17,3 +23,5 @@
     <% end %>
   </div>
 </div>
+
+
