@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :correct_user, only: [:edit, :update]
+
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.order(created_at: :desc)
@@ -18,6 +20,18 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+
+  def edit 
+  end
+    
+  def update
+    if @user.update(user_params)
+      flash[:success] = "Update Complete!"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
   
   def followings
     @title = 'followings'
@@ -33,12 +47,18 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
+    params.require(:user).permit(:name, :email, :location, :age, :password,
                                  :password_confirmation)
   end
-  
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def correct_user
+    redirect_to root_path if @user != current_user
+  end
 end
