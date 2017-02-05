@@ -10,7 +10,10 @@
       <li>Location：<%= @user.location %></li>
       <li>Email：<%= @user.email %></li>
       <li>Age：<%= @user.age %></li>
+      <li>Followers : <%= link_to "Followers", followers_user_path(@user) %></li> 
+      <li>Followeings : <%= link_to "Followings", followings_user_path(@user) %></li>
     </ul>
+            
 
   </aside>
   <div class="col-md-8">
